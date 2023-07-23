@@ -9,3 +9,17 @@ Pre-requisite:
 - `pip install fastapi`
 - `pip install uvicorn` (Uvicorn lets us run the API as a webserver
 
+What is an Endpoint?
+Point of entry in a communication channel when 2 systems are interacting
+baseURL/endpoint
+Examples:
+- /hello
+- /get-item
+- localhost/form
+  - localhost is the baseURL when we are hosting locally
+- facebook.com/home
+
+
+
+
+
