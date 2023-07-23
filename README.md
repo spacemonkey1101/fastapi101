@@ -20,6 +20,9 @@ Examples:
 - facebook.com/home
 
 
+What is an API?
 
+Application Program Interface. Its a webservice that provides an interface to applications to manipulate and retrieve info.
 
-
+Example: Amazon would have an API for managing inventory
+Any application(web, mobile) can talk to the same inventory API to get the details. So they can have a single backend for all of their different frontend.
