@@ -24,3 +24,7 @@ def home():
 >uvicorn <python filename>:<fastapi object> --reload
 reload is to autoreload on change
 '''
+
+@app.get("/about")
+def about():
+    return {"Data": "About"}
