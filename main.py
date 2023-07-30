@@ -53,3 +53,8 @@ This tells that the item_id should be an int
 @app.get('/get-item/{item_id}')
 def get_item(item_id : int ):
     return inventory[item_id]
+
+# multiple query params
+@app.get('/get-item-brand/{item_id}/{name}')
+def get_item_brand(item_id : int, name : str):
+    return inventory[item_id]
