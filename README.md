@@ -7,11 +7,13 @@ You can create an API fast(duh!). Apart from that.
 
 Pre-requisite:
 - `pip install fastapi`
-- `pip install uvicorn` (Uvicorn lets us run the API as a webserver
+- `pip install uvicorn` (Uvicorn lets us run the API as a webserver)
 
 What is an Endpoint?
+
 Point of entry in a communication channel when 2 systems are interacting
-baseURL/endpoint
+It is of the form baseURL/endpoint
+
 Examples:
 - /hello
 - /get-item
@@ -24,5 +26,5 @@ What is an API?
 
 Application Program Interface. Its a webservice that provides an interface to applications to manipulate and retrieve info.
 
-Example: Amazon would have an API for managing inventory
+Example: Amazon would have an API for managing inventory.
 Any application(web, mobile) can talk to the same inventory API to get the details. So they can have a single backend for all of their different frontend.
