@@ -28,3 +28,10 @@ Application Program Interface. Its a webservice that provides an interface to ap
 
 Example: Amazon would have an API for managing inventory.
 Any application(web, mobile) can talk to the same inventory API to get the details. So they can have a single backend for all of their different frontend.
+
+Path parameter is the parameter that comes in the URL path
+Eg: amazon.com/bedcover/1
+
+Query paramenter is the parameter that comes in the URL path after a questsion mark ?
+Eg: facebook.com/home?redirect=/tim&msg=fail
+So we set 2 parameters redirect and msg

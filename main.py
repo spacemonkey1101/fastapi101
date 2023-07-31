@@ -65,3 +65,13 @@ def get_item_brand(item_id: int, name: str):
 @app.get("/get-item-path/{item_id}")
 def get_item_path(item_id: int = Path(..., description="ID of the item you want to view",gt=0,le=1)):
     return inventory[item_id]
+
+#query parameter
+# we are going to take 1 query param called name
+# by default if it does not get name in the URL path it will be a query param
+@app.get("/get-by-name")
+def get_by_name(name:str):
+    for it in inventory:
+        if inventory[it]["name"] == name:
+            return inventory[it]
+    return {'Data' : 'Not Found'}
