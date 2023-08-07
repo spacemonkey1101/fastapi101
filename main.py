@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Path
-
+from typing import Optional
 # creates an API object
 app = FastAPI()
 """
@@ -71,6 +71,15 @@ def get_item_path(item_id: int = Path(..., description="ID of the item you want 
 # by default if it does not get name in the URL path it will be a query param
 @app.get("/get-by-name")
 def get_by_name(name:str):
+    for it in inventory:
+        if inventory[it]["name"] == name:
+            return inventory[it]
+    return {'Data' : 'Not Found'}
+
+#add more details to query parameter and make them optional
+# this will default to Data Not found when we do not pass a param 
+@app.get("/get-by-name2")
+def get_by_name(name: Optional[str] = None):
     for it in inventory:
         if inventory[it]["name"] == name:
             return inventory[it]
