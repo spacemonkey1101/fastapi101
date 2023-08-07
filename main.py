@@ -47,13 +47,13 @@ inventory = {
 This tells that the item_id should be an int
 """
 
-
+#path parameter example
 @app.get("/get-item/{item_id}")
 def get_item(item_id: int):
     return inventory[item_id]
 
 
-# multiple query params
+# multiple path params
 @app.get("/get-item-brand/{item_id}/{name}")
 def get_item_brand(item_id: int, name: str):
     return inventory[item_id]
@@ -66,7 +66,7 @@ def get_item_brand(item_id: int, name: str):
 def get_item_path(item_id: int = Path(..., description="ID of the item you want to view",gt=0,le=1)):
     return inventory[item_id]
 
-#query parameter
+# query parameter
 # we are going to take 1 query param called name
 # by default if it does not get name in the URL path it will be a query param
 @app.get("/get-by-name")
