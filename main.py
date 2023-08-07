@@ -106,3 +106,14 @@ def get_by_name(*, name: Optional[str] = None, test: str):
 # the below query would work
 # http://127.0.0.1:8000/get-by-name3?name=Milk&test=1
 # http://127.0.0.1:8000/get-by-name3?test=1
+
+
+# combine query and path params
+# item_id is a path param, name is a optional query param, test is a mandatory query param
+@app.get("/get-by-name4/{item_id}")
+def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
+    for it in inventory:
+        if inventory[it]["name"] == name:
+            return inventory[it]
+    return {"Data": "Not Found"}
+# this query works http://127.0.0.1:8000/get-by-name4/1?test=1&name=Milk
