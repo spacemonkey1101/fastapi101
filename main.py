@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Path
 from typing import Optional
 from pydantic import BaseModel
+
 # creates an API object
 app = FastAPI()
 """
@@ -116,18 +117,25 @@ def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
         if inventory[it]["name"] == name:
             return inventory[it]
     return {"Data": "Not Found"}
+
+
 # this query works http://127.0.0.1:8000/get-by-name4/1?test=1&name=Milk
 
+
 class Item(BaseModel):
-    """Item is defined in a way that access the kind of item our post method create_item would accept
-    """
-    name:str
-    price:float
+    """Item is defined in a way that access the kind of item our post method create_item would accept"""
+
+    name: str
+    price: float
     brand: Optional[str] = None
-    
-#post endpoint
-#we will take some info from the request body and create an item in inventory
-#we will define the Item type which inherits from BaseModel
-@app.post("/create-item/")
-def create_item(item: Item):
-    return {}
+
+
+# post endpoint
+# we will take some info from the request body and create an item in inventory
+# we will define the Item type which inherits from BaseModel
+@app.post("/create-item/{item_id}")
+def create_item(item_id: int, item: Item):
+    if item_id in inventory:
+        return {"Error": "Item Id already exist"}
+    inventory[item_id] = {"name": item.name, "price": item.price, "brand": item.brand}
+    return inventory[item_id]
