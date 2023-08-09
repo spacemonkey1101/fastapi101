@@ -35,3 +35,7 @@ Eg: amazon.com/bedcover/1
 ### Query paramenter is the parameter that comes in the URL path after a questsion mark '?'
 Eg: facebook.com/home?redirect=/tim&msg=fail
 So we set 2 parameters redirect and msg
+
+### Request Body
+Often times when we are trying to add info to a DB, we are not going to be sending info in query or path params.
+We will send a bunch of info together in a request body
