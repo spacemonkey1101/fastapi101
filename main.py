@@ -74,7 +74,7 @@ def get_item_path(
 
 # query parameter
 # we are going to take 1 query param called name
-# by default if it does not get name in the URL path it will be a query param
+# by default if it does not get name in the URL path it will look for a query param called name
 @app.get("/get-by-name")
 def get_by_name(name: str):
     for it in inventory:
@@ -85,6 +85,18 @@ def get_by_name(name: str):
 
 # add more details to query parameter and make them optional
 # this will default to Data Not found when we do not pass a param
+
+
+# this works but not recommended way
+@app.get("/get-by-name-optional")
+def get_by_name(name: str = None):
+    for it in inventory:
+        if inventory[it]["name"] == name:
+            return inventory[it]
+    return {"Data": "Not Found"}
+
+
+#recommended way for optional pararm
 @app.get("/get-by-name2")
 def get_by_name(name: Optional[str] = None):
     for it in inventory:
