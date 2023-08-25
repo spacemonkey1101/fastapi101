@@ -39,3 +39,13 @@ So we set 2 parameters redirect and msg
 ### Request Body
 Often times when we are trying to add info to a DB, we are not going to be sending info in query or path params.
 We will send a bunch of info together in a request body
+
+## Status codes and error responces
+Endpoints return status codes. We may return dict/JSON objects from the function but it will return the default status codes of these HTTP methods based on success/failure 
+200 : success
+201 : created
+404 : not found
+5XX : Server error
+4XX : Client error
+3XX : Redirection
+2XX : Success
