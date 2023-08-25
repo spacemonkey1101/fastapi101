@@ -77,7 +77,9 @@ def get_by_name(name: str):
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="item with name not found"
+    )
 
 
 # add more details to query parameter and make them optional
@@ -90,7 +92,9 @@ def get_by_name(name: str = None):
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="item with name not found"
+    )
 
 
 # recommended way for optional pararm
@@ -99,7 +103,9 @@ def get_by_name(name: Optional[str] = None):
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="item with name not found"
+    )
 
 
 # multiple query param
@@ -109,7 +115,9 @@ def get_by_name(*, name: Optional[str] = None, test: str):
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="item with name not found"
+    )
 
 
 # since test is a mandatory param we have to pass it
@@ -125,7 +133,9 @@ def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="item with name not found"
+    )
 
 
 # this query works http://127.0.0.1:8000/get-by-name4/1?test=1&name=Milk
@@ -142,7 +152,9 @@ def get_item(
     for it in inventory:
         if inventory[it].name == name:
             return inventory[it]
-    raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="Item name not found"
+    )
 
 
 # request body
