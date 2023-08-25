@@ -153,5 +153,5 @@ class Item(BaseModel):
 def create_item(item_id: int, item: Item):
     if item_id in inventory:
         return {"Error": "Item Id already exist"}
-    inventory[item_id] = {"name": item.name, "price": item.price, "brand": item.brand}
+    inventory[item_id] = item # it gets converted to a pyton dict/json object
     return inventory[item_id]
