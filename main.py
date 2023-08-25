@@ -63,11 +63,11 @@ def get_item_brand(item_id: int, name: str):
 
 
 # path function in FastAPI
-# This allows to add more details, constraints to out path param
+# This allows to add more details, constraints to our path param
 # if you dont pass a item_id we get None
 @app.get("/get-item-path/{item_id}")
 def get_item_path(
-    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=3)
+    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=2)
 ):
     return inventory[item_id]
 
