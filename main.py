@@ -192,3 +192,13 @@ def update_item(item_id: int, item: UpdateItem):
         inventory[item_id].brand = item.brand
 
     return inventory[item_id]
+
+
+# DELETE HTTP method to delete an item
+@app.delete("/delete-item/{item_id}")
+def delete_item(item_id: int):
+    if item_id not in inventory:
+        return {"Error": "Item Id does not exist"}
+    temp = inventory[item_id]
+    del inventory[item_id]
+    return temp
