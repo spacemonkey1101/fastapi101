@@ -49,3 +49,6 @@ Endpoints return status codes. We may return dict/JSON objects from the function
 4XX : Client error
 3XX : Redirection
 2XX : Success
+
+# Conclusion
+So we have built an inventory management system. With different APIs performing the CRUD operation. The data is not stored in any DB and is stored in program
