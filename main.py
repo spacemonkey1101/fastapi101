@@ -96,7 +96,7 @@ def get_by_name(name: str = None):
     return {"Data": "Not Found"}
 
 
-#recommended way for optional pararm
+# recommended way for optional pararm
 @app.get("/get-by-name2")
 def get_by_name(name: Optional[str] = None):
     for it in inventory:
@@ -106,7 +106,7 @@ def get_by_name(name: Optional[str] = None):
 
 
 # multiple query param
-# defalut arg in python comes at last; to get around this use * at the start
+# defalut arg in python comes at last; to get around this use * at the start of the param list
 @app.get("/get-by-name3")
 def get_by_name(*, name: Optional[str] = None, test: str):
     for it in inventory:
@@ -132,8 +132,10 @@ def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
 
 
 # this query works http://127.0.0.1:8000/get-by-name4/1?test=1&name=Milk
+# also this http://127.0.0.1:8000/get-by-name4/1?test=q&name=Biscuits
 
 
+# request body
 class Item(BaseModel):
     """Item is defined in a way that access the kind of item our post method create_item would accept"""
 
@@ -145,6 +147,8 @@ class Item(BaseModel):
 # post endpoint
 # we will take some info from the request body and create an item in inventory
 # we will define the Item type which inherits from BaseModel
+# item is a class, fast api assumes that its not meant to be a query param
+# instead its a request body
 @app.post("/create-item/{item_id}")
 def create_item(item_id: int, item: Item):
     if item_id in inventory:
