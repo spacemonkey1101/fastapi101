@@ -154,6 +154,16 @@ class Item(BaseModel):
     brand: Optional[str] = None
 
 
+# we have to create another class for UPDATE
+# every field should be optional
+class UpdateItem(BaseModel):
+    """Item is defined in a way that access the kind of item our post method create_item would accept"""
+
+    name: Optional[str] = None
+    price: Optional[float] = None
+    brand: Optional[str] = None
+
+
 # post endpoint
 # we will take some info from the request body and create an item in inventory
 # we will define the Item type which inherits from BaseModel
@@ -164,4 +174,21 @@ def create_item(item_id: int, item: Item):
     if item_id in inventory:
         return {"Error": "Item Id already exist"}
     inventory[item_id] = item
+    return inventory[item_id]
+
+
+# PUT method to update an item
+
+
+@app.put("/update-item/{item_id}")
+def update_item(item_id: int, item: UpdateItem):
+    if item_id not in inventory:
+        return {"Error": "Item Id does not exist"}
+    if item.name:
+        inventory[item_id].name = item.name
+    if item.price:
+        inventory[item_id].price = item.price
+    if item.brand:
+        inventory[item_id].brand = item.brand
+
     return inventory[item_id]
