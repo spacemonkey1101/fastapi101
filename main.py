@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Query
 from typing import Optional
 from pydantic import BaseModel
 
@@ -135,6 +135,19 @@ def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
 # also this http://127.0.0.1:8000/get-by-name4/1?test=q&name=Biscuits
 
 
+# better way of dealing with query parameters
+@app.get("/get-by-name-query")
+def get_item(
+    name: str = Query(
+        None, title="Name", description="Name of item.", max_length=10, min_length=2
+    )
+):
+    for it in inventory:
+        if inventory[it]["name"] == name:
+            return inventory[it]
+    return {"Data": "Not Found"}
+
+
 # request body
 class Item(BaseModel):
     """Item is defined in a way that access the kind of item our post method create_item would accept"""
@@ -153,5 +166,5 @@ class Item(BaseModel):
 def create_item(item_id: int, item: Item):
     if item_id in inventory:
         return {"Error": "Item Id already exist"}
-    inventory[item_id] = item # it gets converted to a pyton dict/json object
+    inventory[item_id] = item  # it gets converted to a pyton dict/json object
     return inventory[item_id]
