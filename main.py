@@ -39,10 +39,7 @@ def about():
 
 
 # path parameter and query parameter
-inventory = {
-    1: {"name": "Milk", "price": 100, "brand": "Amul"},
-    2: {"name": "Biscuits", "price": 200, "brand": "Parle"},
-}
+inventory = {}
 
 # endpoint that can retrieve for us the item info from inventory based on its id
 """ var : type name == type hing == type annotation
@@ -67,7 +64,7 @@ def get_item_brand(item_id: int, name: str):
 # if you dont pass a item_id we get None
 @app.get("/get-item-path/{item_id}")
 def get_item_path(
-    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=2)
+    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=10)
 ):
     return inventory[item_id]
 
@@ -78,7 +75,7 @@ def get_item_path(
 @app.get("/get-by-name")
 def get_by_name(name: str):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -91,7 +88,7 @@ def get_by_name(name: str):
 @app.get("/get-by-name-optional")
 def get_by_name(name: str = None):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -100,7 +97,7 @@ def get_by_name(name: str = None):
 @app.get("/get-by-name2")
 def get_by_name(name: Optional[str] = None):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -110,7 +107,7 @@ def get_by_name(name: Optional[str] = None):
 @app.get("/get-by-name3")
 def get_by_name(*, name: Optional[str] = None, test: str):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -126,7 +123,7 @@ def get_by_name(*, name: Optional[str] = None, test: str):
 @app.get("/get-by-name4/{item_id}")
 def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -139,11 +136,11 @@ def get_by_name(*, item_id: int, name: Optional[str] = None, test: str):
 @app.get("/get-by-name-query")
 def get_item(
     name: str = Query(
-        None, title="Name", description="Name of item.", max_length=10, min_length=2
+        ..., title="Name", description="Name of item.", max_length=10, min_length=2
     )
 ):
     for it in inventory:
-        if inventory[it]["name"] == name:
+        if inventory[it].name == name:
             return inventory[it]
     return {"Data": "Not Found"}
 
@@ -166,5 +163,5 @@ class Item(BaseModel):
 def create_item(item_id: int, item: Item):
     if item_id in inventory:
         return {"Error": "Item Id already exist"}
-    inventory[item_id] = item  # it gets converted to a pyton dict/json object
+    inventory[item_id] = item
     return inventory[item_id]
