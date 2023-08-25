@@ -20,9 +20,9 @@ def home():
 
 
 # when we run our webserver and hit the root endpoint, it will return us the dictionary
-# as soon as the function returns the dictionary is converted to a JSON
-# this is a easier way for HTTP traffic to exchange
-# fastapi handles JSONifying all of our data, so that we can work with python types
+# as soon as the function returns the dictionary is converted to a JSON object
+# this is a easier way for HTTP traffic to exchange data
+# fastapi handles JSONifying all of our data, so that we can work with python data types
 # same happens we receive JSON data, fast api converts it to python types for us to work with
 
 
@@ -67,7 +67,7 @@ def get_item_brand(item_id: int, name: str):
 # if you dont pass a item_id we get None
 @app.get("/get-item-path/{item_id}")
 def get_item_path(
-    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=1)
+    item_id: int = Path(..., description="ID of the item you want to view", gt=0, le=3)
 ):
     return inventory[item_id]
 
